@@ -4,4 +4,10 @@ import App from "./App";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<App />);
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <div>
+    Приложение работает!
+    <button>Кнопка</button>
+  </div>,
+  document.getElementById("root")
+);

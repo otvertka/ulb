@@ -17,7 +17,7 @@ function App() {
       <input
         type="text"
         value={value}
-        onChange={(event) => setValue(event.target.value)} // Двухстороннее связывание.Реализовали связывание состояний, кот. нах в инпуте
+        onChange={(event) => setValue(event.target.value)}
       />
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>

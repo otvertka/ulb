@@ -14,11 +14,6 @@ function App() {
     <div className="App">
       <h1>{likes}</h1>
       <h1>{value}</h1>
-      <input
-        type="text"
-        value={value}
-        onChange={(event) => setValue(event.target.value)} // Двухстороннее связывание.Реализовали связывание состояний, кот. нах в инпуте
-      />
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
     </div>

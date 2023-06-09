@@ -4,4 +4,11 @@ import App from "./App";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<App />);
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  React.createElement(
+    "button",
+    { onClick: () => console.log("CLICK!") },
+    React.createElement("div")
+  ),
+  document.getElementById("root")
+);
