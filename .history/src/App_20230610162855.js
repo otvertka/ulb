@@ -18,6 +18,7 @@ function App() {
   return (
     <div className="App">
       <form>
+        <MyInput></MyInput>
         <MyInput type="text" placeholder="Название поста"></MyInput>
         <MyInput type="text" placeholder="Описание поста"></MyInput>
         <MyButton disabled>Создать пост</MyButton>
