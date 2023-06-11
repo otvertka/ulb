@@ -19,10 +19,13 @@ function App() {
 
   const addNewPost = (e) => {
     e.preventDefault();
-
+    const newPost = {
+      id: Date.now(),
+      title,
+      body,
+    };
     // вызываем функцию, куда передаём новый массив Постов, куда разворачиваем старый массив с уже существующими постами и добавляем в конец новый пост
-    setPosts([...posts, { ...post, id: Date.now() }]);
-    setPosts({ title: "", body: "" });
+    setPosts([...posts, newPost]);
   };
   // импортируем компонент
   return (

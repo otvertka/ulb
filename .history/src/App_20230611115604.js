@@ -15,14 +15,13 @@ function App() {
     { id: 3, title: "Javascript 3", body: "Description" },
   ]);
 
-  const [post, setPost] = useState({ title: "", body: "" });
+  const [title, setTitle] = useState("");
+  const bodyInputRef = useRef();
 
   const addNewPost = (e) => {
     e.preventDefault();
-
-    // вызываем функцию, куда передаём новый массив Постов, куда разворачиваем старый массив с уже существующими постами и добавляем в конец новый пост
-    setPosts([...posts, { ...post, id: Date.now() }]);
-    setPosts({ title: "", body: "" });
+    console.log(title);
+    console.log(bodyInputRef.current);
   };
   // импортируем компонент
   return (
@@ -30,15 +29,14 @@ function App() {
       <form>
         {/* Управляемый компонент */}
         <MyInput
-          value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           type="text"
           placeholder="Название поста"
         ></MyInput>
-        {/* Неуправляемый\ Неконтролируемый компонент */}
+
         <MyInput
-          value={post.body}
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
+          ref={bodyInputRef}
           type="text"
           placeholder="Описание поста"
         ></MyInput>

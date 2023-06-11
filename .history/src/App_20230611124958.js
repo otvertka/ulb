@@ -19,10 +19,13 @@ function App() {
 
   const addNewPost = (e) => {
     e.preventDefault();
-
+    const newPost = {
+      id: Date.now(),
+      title,
+      body,
+    };
     // вызываем функцию, куда передаём новый массив Постов, куда разворачиваем старый массив с уже существующими постами и добавляем в конец новый пост
-    setPosts([...posts, { ...post, id: Date.now() }]);
-    setPosts({ title: "", body: "" });
+    setPosts([...posts, newPost]);
   };
   // импортируем компонент
   return (
@@ -31,14 +34,14 @@ function App() {
         {/* Управляемый компонент */}
         <MyInput
           value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          onChange={(e) => setTitle(e.target.value)}
           type="text"
           placeholder="Название поста"
         ></MyInput>
         {/* Неуправляемый\ Неконтролируемый компонент */}
         <MyInput
           value={post.body}
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
+          onChange={(e) => setBody(e.target.value)}
           type="text"
           placeholder="Описание поста"
         ></MyInput>
