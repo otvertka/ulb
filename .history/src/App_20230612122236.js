@@ -18,19 +18,6 @@ function App() {
   ]);
 
   const [selectedSort, setSelectedSort] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  function getSortedPosts() {
-    console.log("ОТРАБОТАЛА ФУНКЦИЯ СОРТЕД ПОСТ");
-    if (selectedSort) {
-      return [...posts].sort(
-        (a, b) => a[selectedSort].localeCompare(b[selectedSort]) // развернём Посты в новый массив и мутируем его
-      );
-    }
-    return posts;
-  }
-
-  const sortedPosts = getSortedPosts();
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -43,6 +30,8 @@ function App() {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
+
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort]))); // развернём Посты в новый массив и мутируем его
     console.log(sort);
   };
   // импортируем компонент
@@ -51,11 +40,6 @@ function App() {
       {/* передаём в компонент функцию обратного вызова, чтобы добавить в родительский массив дочерний новый элемент */}
       <PostForm create={createPost} />
       <div>
-        <MyInput
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Поиск..."
-        />
         <MySelect
           value={selectedSort}
           onChange={sortPosts}
@@ -67,7 +51,7 @@ function App() {
         />
       </div>
       {posts.length !== 0 ? (
-        <PostList remove={removePost} posts={sortedPosts} title="Посты по JS" />
+        <PostList remove={removePost} posts={posts} title="Посты по JS" />
       ) : (
         <h2 style={{ textAlign: "center" }}>Посты не найдены !</h2>
       )}

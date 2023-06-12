@@ -20,17 +20,16 @@ function App() {
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+
   function getSortedPosts() {
-    console.log("ОТРАБОТАЛА ФУНКЦИЯ СОРТЕД ПОСТ");
-    if (selectedSort) {
+    if(selectedSort) {
       return [...posts].sort(
         (a, b) => a[selectedSort].localeCompare(b[selectedSort]) // развернём Посты в новый массив и мутируем его
-      );
+      )
     }
-    return posts;
   }
 
-  const sortedPosts = getSortedPosts();
+  const sortedPosts = ;
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);

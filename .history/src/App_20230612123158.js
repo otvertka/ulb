@@ -20,17 +20,9 @@ function App() {
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  function getSortedPosts() {
-    console.log("ОТРАБОТАЛА ФУНКЦИЯ СОРТЕД ПОСТ");
-    if (selectedSort) {
-      return [...posts].sort(
-        (a, b) => a[selectedSort].localeCompare(b[selectedSort]) // развернём Посты в новый массив и мутируем его
-      );
-    }
-    return posts;
-  }
-
-  const sortedPosts = getSortedPosts();
+  const sortedPosts = [...posts].sort((a, b) =>
+    a[selectedSort].localeCompare(b[selectedSort])
+  );
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -43,6 +35,8 @@ function App() {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
+
+    setPosts(); // развернём Посты в новый массив и мутируем его
     console.log(sort);
   };
   // импортируем компонент
@@ -67,7 +61,7 @@ function App() {
         />
       </div>
       {posts.length !== 0 ? (
-        <PostList remove={removePost} posts={sortedPosts} title="Посты по JS" />
+        <PostList remove={removePost} posts={posts} title="Посты по JS" />
       ) : (
         <h2 style={{ textAlign: "center" }}>Посты не найдены !</h2>
       )}
