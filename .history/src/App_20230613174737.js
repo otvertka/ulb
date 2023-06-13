@@ -14,7 +14,6 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
 import axios, { Axios } from "axios";
 import PostService from "./API/PostService";
-import Loader from "./components/UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -35,11 +34,8 @@ function App() {
 
   async function fetchPosts() {
     setIsPostLoading(true);
-    setTimeout(async () => {
-      const posts = await PostService.getAll();
-      setPosts(posts);
-      setIsPostLoading(false);
-    }, 1000);
+    const posts = await PostService.getAll();
+    setPosts(posts);
   }
 
   // Получаем post из дочернего компонента
@@ -61,16 +57,11 @@ function App() {
 
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-
-      {isPostLoading ? (
-        <Loader />
-      ) : (
-        <PostList
-          remove={removePost}
-          posts={sortedAndSearchedPosts}
-          title="Посты по JS"
-        />
-      )}
+      <PostList
+        remove={removePost}
+        posts={sortedAndSearchedPosts}
+        title="Посты по JS"
+      />
     </div>
   );
 }

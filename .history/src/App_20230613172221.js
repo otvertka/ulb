@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
@@ -12,9 +12,6 @@ import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
-import axios, { Axios } from "axios";
-import PostService from "./API/PostService";
-import Loader from "./components/UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -22,11 +19,6 @@ function App() {
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostLoading, setIsPostLoading] = useState(false);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -34,12 +26,10 @@ function App() {
   };
 
   async function fetchPosts() {
-    setIsPostLoading(true);
-    setTimeout(async () => {
-      const posts = await PostService.getAll();
-      setPosts(posts);
-      setIsPostLoading(false);
-    }, 1000);
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    console.log(response.data);
   }
 
   // Получаем post из дочернего компонента
@@ -50,7 +40,6 @@ function App() {
   // импортируем компонент
   return (
     <div className="App">
-      <button onClick={fetchPosts}>GET POSTS</button>
       <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
         Создать пользователя
       </MyButton>
@@ -61,16 +50,11 @@ function App() {
 
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-
-      {isPostLoading ? (
-        <Loader />
-      ) : (
-        <PostList
-          remove={removePost}
-          posts={sortedAndSearchedPosts}
-          title="Посты по JS"
-        />
-      )}
+      <PostList
+        remove={removePost}
+        posts={sortedAndSearchedPosts}
+        title="Посты по JS"
+      />
     </div>
   );
 }
