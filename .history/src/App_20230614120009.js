@@ -17,7 +17,6 @@ import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount, getPagesArray } from "./utils/pages";
-import Pagination from "./components/UI/pagination/Pagination";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -36,6 +35,7 @@ function App() {
       setTotalPages(getPageCount(totalCount, limit));
     }
   );
+  let pagesArray = getPagesArray(totalPages);
 
   useEffect(() => {
     fetchPosts(limit, page);
@@ -85,8 +85,17 @@ function App() {
           title="Посты по JS"
         />
       )}
-
-      <Pagination page={page} changePage={changePage} totalPages={totalPages} />
+      <div className="page__wrapper">
+        {pagesArray.map((p) => (
+          <span
+            onClick={() => changePage(p)}
+            key={p}
+            className={page === p ? "page page__current" : "page"}
+          >
+            {p}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

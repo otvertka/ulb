@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
-import "./styles/App.css";
+// import "./styles/App.css";
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
@@ -12,14 +12,14 @@ import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
-import axios, { Axios } from "axios";
+// import axios, { Axios } from "axios";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount, getPagesArray } from "./utils/pages";
 import Pagination from "./components/UI/pagination/Pagination";
 
-function App() {
+function Posts() {
   const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
@@ -91,4 +91,4 @@ function App() {
   );
 }
 
-export default App;
+export default Posts;
